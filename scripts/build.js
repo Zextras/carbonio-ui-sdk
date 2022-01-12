@@ -43,28 +43,15 @@ const logBuild =
 		const info = stats.toJson();
 
 		if (stats.hasWarnings()) {
-			console.log('\n', chalk.bgYellow.white.bold(`Compilation Warning${info.warnings.length > 0 ? 's' : ''}`));
-			info.warnings.forEach((warn, index) => {
-				console.log('\n', chalk.bgYellow.white.bold(` Warning ${index + 1}: `),' ' + chalk.yellow(warn.message));
-				console.log(chalk.yellow(' On module: ') + chalk.greenBright(warn.moduleName) + chalk.yellow(' at ') + chalk.greenBright(warn.loc));
-				if (warn.details) {
-					console.log(chalk.yellow(' Details: '), warn.details);
-				}
-			});
+			chalk.bgRed.white.bold(`Webpack Compilations Warning${info.warnings.length > 0 ? 's' : ''}`);
+			console.warn(info.warnings);
 		}
 
 		if (stats.hasErrors()) {
 			console.log(
-				'\n', chalk.bgRed.white.bold(`Compilation Error${info.errors.length > 0 ? 's' : ''}`)
+				chalk.bgRed.white.bold(`Webpack Compilations Error${info.errors.length > 0 ? 's' : ''}`)
 			);
-			info.errors.forEach((error, index) => {
-				console.log('\n', chalk.bgRed.white.bold(` Error ${index + 1}: `));
-				console.log(chalk.yellow(' On module: ') + chalk.greenBright(error.moduleName) + chalk.yellow(' at ') + chalk.greenBright(error.loc));
-				console.log(' ' + chalk.yellow(error.message));
-				if (error.details) {
-					console.log(chalk.yellow(' Details: '), error.details);
-				}
-			});
+			console.error(info.errors);
 			reject(err);
 		} else {
 			console.log(chalk.bgBlue.white.bold('Compiled Successfully!'));
