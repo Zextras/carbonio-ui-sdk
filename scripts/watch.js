@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2021 2021 Zextras <https://www.zextras.com>
+ * SPDX-FileCopyrightText: 2021 Zextras <https://www.zextras.com>
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
@@ -21,7 +21,9 @@ function parseArguments() {
 			'--standalone': Boolean,
 			'-s': '--standalone',
 			'--error-reporter': Boolean,
-			'-e': '--error-reporter'
+			'-e': '--error-reporter',
+			'--use-local-ds': Boolean,
+			'-u': '--use-local-ds'
 		},
 		{
 			argv: process.argv.slice(2),
@@ -31,7 +33,8 @@ function parseArguments() {
 	return {
 		host: args['--host'] || 'localhost:4443',
 		standalone: args['--standalone'] || false,
-		errorReporter: args['--error-reporter'] || false
+		errorReporter: args['--error-reporter'] || false,
+		useLocalDS: args['--error-reporter'] || false
 	};
 }
 

@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2021 2021 Zextras <https://www.zextras.com>
+ * SPDX-FileCopyrightText: 2021 Zextras <https://www.zextras.com>
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
@@ -161,8 +161,8 @@ exports.setupWebpackBuildConfig = (options, { basePath, commitHash }) => {
 		moment: `__ZAPP_SHARED_LIBRARIES__['moment']`,
 		'styled-components': `__ZAPP_SHARED_LIBRARIES__['styled-components']`,
 		'@reduxjs/toolkit': `__ZAPP_SHARED_LIBRARIES__['@reduxjs/toolkit']`,
-		'@zextras/zapp-shell': `__ZAPP_SHARED_LIBRARIES__['@zextras/zapp-shell']['${pkg.zapp.name}']`,
-		'@zextras/zapp-ui': `__ZAPP_SHARED_LIBRARIES__['@zextras/zapp-ui']`,
+		'@zextras/carbonio-shell-ui': `__ZAPP_SHARED_LIBRARIES__['@zextras/carbonio-shell-ui']['${pkg.zapp.name}']`,
+		'@zextras/carbonio-design-system': `__ZAPP_SHARED_LIBRARIES__['@zextras/carbonio-design-system']`,
 		/* Exports for App's Handlers */
 		faker: `__ZAPP_SHARED_LIBRARIES__['faker']`,
 		msw: `__ZAPP_SHARED_LIBRARIES__['msw']`
