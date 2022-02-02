@@ -16,7 +16,7 @@ if (!fs.existsSync(path.resolve(process.cwd(), 'sdk/node_modules'))) {
 	return;
 }
 const { runCoffee } = require('./coffee');
-const { runBuild } = require('./build');
+const { runBuild, runExternalBuild} = require('./build');
 const { runDeploy } = require('./deploy');
 const { runHelp } = require('./help');
 const { runWatch } = require('./watch');
@@ -47,7 +47,7 @@ const sdk = async () => {
 			break;
 		}
 		case 'build': {
-			runBuild();
+			await Promise.all([runBuild(), runExternalBuild()]);
 			break;
 		}
 		case 'deploy': {

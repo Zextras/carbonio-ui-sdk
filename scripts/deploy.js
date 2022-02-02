@@ -8,7 +8,7 @@
 const arg = require('arg');
 const { execSync, spawn } = require('child_process');
 const chalk = require('chalk');
-const { runBuild } = require('./build');
+const { runBuild, runExternalBuild} = require('./build');
 const { pkg } = require('./utils/pkg');
 const { buildSetup } = require('./utils/setup');
 
@@ -50,7 +50,12 @@ const updateJson = (jsonObject, stats) => {
 };
 exports.runDeploy = async () => {
 	const options = parseArguments();
-	const stats = await runBuild();
+	let stats = await runBuild();
+	const statsOptional = await runExternalBuild();
+	stats.compilation.assets = {
+		...stats.compilation.assets,
+		...statsOptional.compilation.assets
+	}
 	if (options.host) {
 		const target = `${options.user}@${options.host}`;
 		console.log('- Deploying to the carbonio podman container...');

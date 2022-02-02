@@ -11,6 +11,7 @@ const webpack = require('webpack');
 const { buildSetup } = require('./utils/setup');
 const { pkg } = require('./utils/pkg');
 const { setupWebpackBuildConfig } = require('./configs/webpack.build.config');
+const { setupWebpackExternalBuildConfig } = require('../../src/app/external.webpack');
 
 function parseArguments() {
 	const args = arg(
@@ -67,4 +68,14 @@ exports.runBuild = () =>
 		const config = setupWebpackBuildConfig(options, buildSetup);
 		const compiler = webpack(config);
 		compiler.run(logBuild(p));
+	});
+
+exports.runExternalBuild = () =>
+	new Promise((...p) => {
+		const options = parseArguments();
+		console.log('Building external', chalk.green(pkg.zapp.name));
+		console.log('Using base path ', chalk.green(buildSetup.basePath));
+		const externalConfig = setupWebpackExternalBuildConfig(options, buildSetup);
+		const compilerExternal = webpack(externalConfig);
+		compilerExternal.run(logBuild(p));
 	});
